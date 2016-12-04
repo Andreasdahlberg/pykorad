@@ -33,28 +33,28 @@ def main():
 
     args = parser.parse_args()
 
-    power_suppy = PowerSupply(args.port)
+    with PowerSupply(args.port) as power_suppy:
 
-    if args.identification:
-        print(power_suppy.get_identification())
+        if args.identification:
+            print(power_suppy.get_identification())
 
-    if args.current != None:
-        power_suppy.set_output_current(args.current)
+        if args.current != None:
+            power_suppy.set_output_current(args.current)
 
-    if args.voltage != None:
-        power_suppy.set_output_voltage(args.voltage)
+        if args.voltage != None:
+            power_suppy.set_output_voltage(args.voltage)
 
-    if args.memory != None:
-        power_suppy.recall_from_memory(args.memory)
+        if args.memory != None:
+            power_suppy.recall_from_memory(args.memory)
 
-    if args.voltageout:
-        print("Voltage: {} V".format(power_suppy.get_output_voltage()))
+        if args.voltageout:
+            print("Voltage: {} V".format(power_suppy.get_output_voltage()))
 
-    if args.currentout:
-        print("Current: {} A".format(power_suppy.get_output_current()))
+        if args.currentout:
+            print("Current: {} A".format(power_suppy.get_output_current()))
 
-    if args.enable != None:
-        power_suppy.enable_output(args.enable)
+        if args.enable != None:
+            power_suppy.enable_output(args.enable)
 
     return 0
 

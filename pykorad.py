@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import serial
+
 __author__ = 'andreas.dahlberg90@gmail.com (Andreas Dahlberg)'
 __version__ = '0.1.0'
-
-import serial
 
 OUTPUT_ENABLED_MASK = 0x40
 OVER_CURRENT_PROTECTION_ENABLED_MASK = 0x20
@@ -34,6 +34,14 @@ class PowerSupply(object):
 
     def __str__(self):
         return '<PowerSupply> {}'.format(self.get_identification())
+
+
+    def __enter__(self):
+        return self
+
+
+    def __exit__(self, type, value, traceback):
+        self._serial_port.close()
 
 
     def _execute_command(self, command, decode=True):
